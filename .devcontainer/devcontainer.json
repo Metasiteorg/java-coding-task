@@ -1,0 +1,33 @@
+{
+  "name": "Spring PetClinic REST API (Java 25)",
+  "image": "mcr.microsoft.com/devcontainers/java:3-25-trixie",
+
+  // Warm both build caches so the candidate can use whichever build tool they prefer
+  "postCreateCommand": "./mvnw -B -q -DskipTests package && ./gradlew -q --console=plain assemble",
+
+  "forwardPorts": [8080],
+  "portsAttributes": {
+    "8080": {
+      "label": "PetClinic API (Swagger UI at /swagger-ui.html)",
+      "onAutoForward": "notify"
+    }
+  },
+
+  "customizations": {
+    "vscode": {
+      "settings": {
+        // Import the project once, through Maven; Gradle builds still work from the terminal
+        "java.import.gradle.enabled": false,
+        "java.import.maven.enabled": true,
+        "java.configuration.updateBuildConfiguration": "automatic",
+        "java.server.launchMode": "Standard"
+      },
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "vscjava.vscode-gradle",
+        "redhat.vscode-xml"
+      ]
+    }
+  },
+  "remoteUser": "vscode"
+}
